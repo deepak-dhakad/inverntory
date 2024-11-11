@@ -105,26 +105,29 @@ const Home = () => {
       <div className="mb-8 p-4 bg-white rounded-lg shadow-sm border border-gray-200">
   <h3 className="text-xl font-semibold text-gray-800 mb-3 text-center">Filter Material Transactions by Date</h3>
   <div className="flex flex-col gap-3 items-center">
-    <div className="w-full flex flex-col">
-      <label htmlFor="start-date" className="text-sm text-gray-600 font-medium mb-1">Start Date</label>
-      <input
-        type="date"
-        id="start-date"
-        value={startDate}
-        onChange={(e) => setStartDate(e.target.value)}
-        className="border border-gray-300 p-2 rounded-md text-sm focus:ring focus:ring-blue-300"
-      />
-    </div>
-    <div className="w-full flex flex-col">
-      <label htmlFor="end-date" className="text-sm text-gray-600 font-medium mb-1">End Date</label>
-      <input
-        type="date"
-        id="end-date"
-        value={endDate}
-        onChange={(e) => setEndDate(e.target.value)}
-        className="border border-gray-300 p-2 rounded-md text-sm focus:ring focus:ring-blue-300"
-      />
-    </div>
+  <div className="w-full flex space-x-4">
+  <div className="flex-1 flex flex-col">
+    <label htmlFor="start-date" className="text-sm text-gray-600 font-medium mb-1">Start Date</label>
+    <input
+      type="date"
+      id="start-date"
+      value={startDate}
+      onChange={(e) => setStartDate(e.target.value)}
+      className="border border-gray-300 p-2 rounded-md text-sm focus:ring focus:ring-blue-300"
+    />
+  </div>
+  <div className="flex-1 flex flex-col">
+    <label htmlFor="end-date" className="text-sm text-gray-600 font-medium mb-1">End Date</label>
+    <input
+      type="date"
+      id="end-date"
+      value={endDate}
+      onChange={(e) => setEndDate(e.target.value)}
+      className="border border-gray-300 p-2 rounded-md text-sm focus:ring focus:ring-blue-300"
+    />
+  </div>
+</div>
+
     <button
       onClick={() => {
         setStartDate('');

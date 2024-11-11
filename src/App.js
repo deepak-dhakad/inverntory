@@ -11,6 +11,8 @@ import EditTransaction from './components/EditTransaction';
 import Login from './components/Login';
 import { AuthProvider } from './components/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
+import AddLenden from './components/AddLenden'; // New component
+import LendenList from './components/LendenList'; // New component
 
 function App() {
   return (
@@ -28,6 +30,10 @@ function App() {
           <Route path="/transaction-list" element={<ProtectedRoute><TransactionList /></ProtectedRoute>} />
           <Route path="/nominee-transactions/:nomineeId" element={<ProtectedRoute><NomineeTransactions /></ProtectedRoute>} />
           <Route path="/edit-transaction/:id" element={<ProtectedRoute><EditTransaction /></ProtectedRoute>} />
+          
+          {/* New Routes for AddLenden and LendenList */}
+          <Route path="/add-lenden" element={<ProtectedRoute><AddLenden /></ProtectedRoute>} />
+          <Route path="/lenden-list" element={<ProtectedRoute><LendenList /></ProtectedRoute>} />
         </Routes>
       </Router>
     </AuthProvider>

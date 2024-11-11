@@ -1,18 +1,20 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { AuthContext } from './AuthContext'; // Ensure to import your AuthContext here
+import { AuthContext } from './AuthContext';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
-  const { logout } = useContext(AuthContext); // Access the logout function from AuthContext
+  const { logout } = useContext(AuthContext);
   
   const navItems = [
     { name: 'Home', path: '/' },
     { name: 'Add Nominee', path: '/add-nominee' },
     { name: 'Add Transaction', path: '/add-material-transaction' },
-    { name: ' Bill', path: '/add-product-give-transaction' },
+    { name: 'Bill', path: '/add-product-give-transaction' },
     { name: 'Transaction List', path: '/transaction-list' },
+    { name: 'Add Lenden', path: '/add-lenden' }, // New item
+    { name: 'Lenden List', path: '/lenden-list' } // New item
   ];
 
   const toggleMobileMenu = () => {
@@ -20,8 +22,8 @@ const Navbar = () => {
   };
 
   const handleLogout = () => {
-    logout(); // Call the logout function from AuthContext
-    navigate('/login'); // Redirect to the login page after logout
+    logout();
+    navigate('/login');
   };
 
   return (
@@ -67,7 +69,7 @@ const Navbar = () => {
             <li key={index}>
               <Link
                 to={item.path}
-                onClick={toggleMobileMenu} // Close menu on item click
+                onClick={toggleMobileMenu}
                 className="text-blue-500 hover:text-blue-700"
               >
                 {item.name}
