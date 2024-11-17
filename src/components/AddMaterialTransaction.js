@@ -98,6 +98,7 @@ const AddMaterialTransaction = () => {
       const { fine, ...naamTransactionData } = {
         ...transaction,
         amount: transaction.bhav_amount,
+        description: `${transaction.description} ${transaction.bhav}`,
         badla: transaction.badla,
         transType: 'Naam',
       };
