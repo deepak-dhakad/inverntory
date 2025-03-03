@@ -3,25 +3,25 @@ import axios from 'axios';
 
 const AddLenden = () => {
   const [form, setForm] = useState({ name: '', description: '', date: '', transType: '', amount: '' });
-  const [success, setSuccess] = useState(false); // Success message state
-  const [activeTab, setActiveTab] = useState('Other'); // Tab state
+  const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false); // Loader state
+  const [activeTab, setActiveTab] = useState('Other');
 
-  // Handle input changes
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-  // Submit the form
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); // Start loading
     try {
-      // Ensure the "Gorev" name is set explicitly
       const dataToSubmit = { ...form, name: activeTab === 'Gorev' ? 'Gorev' : form.name };
-
       await axios.post(`${process.env.REACT_APP_BACKEND_URL}/lenden/add`, dataToSubmit);
       setForm({ name: '', description: '', date: '', transType: '', amount: '' });
-      setSuccess(true); // Show success message
-      setTimeout(() => setSuccess(false), 3000); // Hide message after 3 seconds
+      setSuccess(true);
+      setTimeout(() => setSuccess(false), 3000);
     } catch (error) {
       console.error('Error adding transaction:', error);
+    } finally {
+      setLoading(false); // Stop loading
     }
   };
 
@@ -53,7 +53,6 @@ const AddLenden = () => {
 
       {/* Form */}
       <form onSubmit={handleSubmit} className="space-y-4">
-        {/* Name Field */}
         <div className="flex flex-col">
           <label className="text-gray-700 font-medium mb-1" htmlFor="name">Name</label>
           <input
@@ -61,9 +60,9 @@ const AddLenden = () => {
             name="name"
             id="name"
             placeholder="Name"
-            value={activeTab === 'Gorev' ? 'Gorev' : form.name} // Fixed for Gorev tab
-            onChange={activeTab === 'Other' ? handleChange : undefined} // Allow changes only in Other tab
-            disabled={activeTab === 'Gorev'} // Disable input for Gorev tab
+            value={activeTab === 'Gorev' ? 'Gorev' : form.name}
+            onChange={activeTab === 'Other' ? handleChange : undefined}
+            disabled={activeTab === 'Gorev'}
             required
             className={`p-2 border border-gray-300 rounded-md focus:outline-none ${
               activeTab === 'Gorev' ? 'bg-gray-100 cursor-not-allowed' : 'focus:ring-2 focus:ring-blue-500'
@@ -71,7 +70,6 @@ const AddLenden = () => {
           />
         </div>
 
-        {/* Other Fields */}
         <div className="flex flex-col">
           <label className="text-gray-700 font-medium mb-1" htmlFor="description">Description</label>
           <input
@@ -128,12 +126,20 @@ const AddLenden = () => {
           />
         </div>
 
-        {/* Submit Button */}
+        {/* Submit Button with Loader */}
         <button
           type="submit"
-          className="w-full p-2 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition duration-300"
+          disabled={loading}
+          className="w-full p-2 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition duration-300 flex justify-center items-center"
         >
-          Add Transaction
+          {loading ? (
+            <span className="flex items-center">
+              <svg className="animate-spin h-5 w-5 mr-2 border-4 border-white border-t-transparent rounded-full" viewBox="0 0 24 24"></svg>
+              Processing...
+            </span>
+          ) : (
+            "Add Transaction"
+          )}
         </button>
       </form>
     </div>
