@@ -305,6 +305,7 @@ const AddProductGiveTransaction = () => {
       startY: currentY,
       body: [
         ['Overall Gross Weight', overallGrossWeight],
+        ['Overall Net Weight', overallGrossWeight - overallBoxWeight - overallPolytheneWeight],
         ['Overall Box Weight', overallBoxWeight],
         ['Overall Polythene Weight', overallPolytheneWeight],
         ['Overall Total Fine', overallFine.toFixed(2)],

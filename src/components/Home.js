@@ -198,33 +198,38 @@ const Home = () => {
       </ul>
 
       {/* Pagination Controls with Page Numbers */}
-      <div className="flex justify-center items-center mt-6 gap-2">
-        <button
-          onClick={() => handlePageChange(currentPage - 1)}
-          className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-md"
-          disabled={currentPage === 1}
-        >
-          Previous
-        </button>
-        {Array.from({ length: totalPages }, (_, index) => (
-          <button
-            key={index + 1}
-            onClick={() => handlePageChange(index + 1)}
-            className={`${
-              currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-800'
-            } font-semibold py-2 px-4 rounded-md`}
-          >
-            {index + 1}
-          </button>
-        ))}
-        <button
-          onClick={() => handlePageChange(currentPage + 1)}
-          className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-md"
-          disabled={currentPage === totalPages}
-        >
-          Next
-        </button>
-      </div>
+      <div className="flex flex-wrap justify-center items-center mt-6 gap-2">
+  <button
+    onClick={() => handlePageChange(currentPage - 1)}
+    className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-md disabled:opacity-50 disabled:cursor-not-allowed"
+    disabled={currentPage === 1}
+  >
+    Previous
+  </button>
+  <div className="flex flex-wrap justify-center gap-2">
+    {Array.from({ length: totalPages }, (_, index) => (
+      <button
+        key={index + 1}
+        onClick={() => handlePageChange(index + 1)}
+        className={`${
+          currentPage === index + 1
+            ? 'bg-blue-500 text-white'
+            : 'bg-gray-300 text-gray-800'
+        } font-semibold py-2 px-4 rounded-md`}
+      >
+        {index + 1}
+      </button>
+    ))}
+  </div>
+  <button
+    onClick={() => handlePageChange(currentPage + 1)}
+    className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-md disabled:opacity-50 disabled:cursor-not-allowed"
+    disabled={currentPage === totalPages}
+  >
+    Next
+  </button>
+</div>
+
     </div>
   );
 };
